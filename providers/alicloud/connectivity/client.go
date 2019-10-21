@@ -15,6 +15,7 @@ import (
 	"github.com/aliyun/alibaba-cloud-sdk-go/sdk/endpoints"
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/alidns"
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/ecs"
+	"github.com/aliyun/alibaba-cloud-sdk-go/services/ots"
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/pvtz"
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/ram"
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/rds"
@@ -56,7 +57,7 @@ type AliyunClient struct {
 	//crconn                       *cr.Client
 	//cdnconn                      *cdn.CdnClient
 	//kmsconn                      *kms.Client
-	//otsconn                      *ots.Client
+	otsconn *ots.Client
 	//cmsconn                      *cms.Client
 	//logconn                      *sls.Client
 	//fcconn                       *fc.Client
@@ -584,6 +585,7 @@ func (client *AliyunClient) WithKmsClient(do func(*kms.Client) (interface{}, err
 	}
 	return do(client.kmsconn)
 }
+*/
 
 func (client *AliyunClient) WithOtsClient(do func(*ots.Client) (interface{}, error)) (interface{}, error) {
 	goSdkMutex.Lock()
@@ -614,6 +616,7 @@ func (client *AliyunClient) WithOtsClient(do func(*ots.Client) (interface{}, err
 	return do(client.otsconn)
 }
 
+/*
 func (client *AliyunClient) WithCmsClient(do func(*cms.Client) (interface{}, error)) (interface{}, error) {
 	goSdkMutex.Lock()
 	defer goSdkMutex.Unlock()

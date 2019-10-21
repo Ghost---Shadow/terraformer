@@ -6,6 +6,8 @@ import (
 	"io/ioutil"
 	"os"
 	"strings"
+
+	"github.com/gobuffalo/packr/v2"
 )
 
 // Load endpoints from endpoints.xml or environment variables to meet specified application scenario, like private cloud.
@@ -81,8 +83,12 @@ func loadEndpoint(region string, serviceCode ServiceCode) string {
 	}
 
 	// Load current path endpoint file endpoints.xml, if failed, it will load from environment variables TF_ENDPOINT_PATH
-	data, err := ioutil.ReadFile("./endpoints.xml")
+	// data, err := ioutil.ReadFile("./endpoints.xml")
+	box := packr.New("alicloud_static", "./static")
+	data, err := box.Find("endpoints.xml")
+
 	if err != nil || len(data) <= 0 {
+		fmt.Println("ERROR: endpoints.xml not found")
 		d, e := ioutil.ReadFile(os.Getenv("TF_ENDPOINT_PATH"))
 		if e != nil {
 			return ""

@@ -19,6 +19,7 @@ require (
 	github.com/digitalocean/godo v1.22.0
 	github.com/dollarshaveclub/new-relic-synthetics-go v0.0.0-20170605224734-4dc3dd6ae884
 	github.com/go-resty/resty v0.0.0-00010101000000-000000000000 // indirect
+	github.com/gobuffalo/packr/v2 v2.5.1
 	github.com/gogo/protobuf v1.3.0 // indirect
 	github.com/golang/groupcache v0.0.0-20191002201903-404acd9df4cc // indirect
 	github.com/google/go-cmp v0.3.1 // indirect
