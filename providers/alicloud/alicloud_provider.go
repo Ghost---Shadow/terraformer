@@ -142,6 +142,7 @@ func (p *AliCloudProvider) GetSupportedService() map[string]terraform_utils.Serv
 		"ecs":     &EcsGenerator{},
 		"keypair": &KeyPairGenerator{},
 		"nat":     &NatGatewayGenerator{},
+		"oss":     &OSSGenerator{},
 		"pvtz":    &PvtzGenerator{},
 		"ram":     &RAMGenerator{},
 		"rds":     &RdsGenerator{},

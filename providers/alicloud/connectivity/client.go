@@ -15,11 +15,13 @@ import (
 	"github.com/aliyun/alibaba-cloud-sdk-go/sdk/endpoints"
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/alidns"
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/ecs"
+	"github.com/aliyun/alibaba-cloud-sdk-go/services/location"
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/pvtz"
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/ram"
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/rds"
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/slb"
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/vpc"
+	"github.com/aliyun/aliyun-oss-go-sdk/oss"
 	"github.com/aliyun/aliyun-tablestore-go-sdk/tablestore"
 	"github.com/denverdino/aliyungo/cs"
 	"github.com/hashicorp/terraform/terraform"
@@ -48,7 +50,7 @@ type AliyunClient struct {
 	csprojectconnByKey           map[string]*cs.ProjectClient
 	//alikafkaconn                 *alikafka.Client
 	//onsconn                      *ons.Client
-	//ossconn                      *oss.Client
+	ossconn *oss.Client
 	//nasconn                      *nas.Client
 	//csconn                       *cs.Client
 	//essconn                      *ess.Client
@@ -327,7 +329,7 @@ func (client *AliyunClient) WithEssClient(do func(*ess.Client) (interface{}, err
 
 	return do(client.essconn)
 }
-
+*/
 func (client *AliyunClient) WithOssClient(do func(*oss.Client) (interface{}, error)) (interface{}, error) {
 	goSdkMutex.Lock()
 	defer goSdkMutex.Unlock()
@@ -379,6 +381,7 @@ func (client *AliyunClient) WithOssClient(do func(*oss.Client) (interface{}, err
 	return do(client.ossconn)
 }
 
+/*
 func (client *AliyunClient) WithOssBucketByName(bucketName string, do func(*oss.Bucket) (interface{}, error)) (interface{}, error) {
 	return client.WithOssClient(func(ossClient *oss.Client) (interface{}, error) {
 		bucket, err := client.ossconn.Bucket(bucketName)
@@ -1167,7 +1170,6 @@ func (client *AliyunClient) getHttpProxyUrl() *url.URL {
 	return nil
 }
 
-/*
 func (client *AliyunClient) describeEndpointForService(serviceCode string) (*location.Endpoint, error) {
 	args := location.CreateDescribeEndpointsRequest()
 	args.ServiceCode = serviceCode
@@ -1204,6 +1206,7 @@ func (client *AliyunClient) describeEndpointForService(serviceCode string) (*loc
 	return nil, fmt.Errorf("There is no any available endpoint for %s in region %s.", serviceCode, client.RegionId)
 }
 
+/*
 func (client *AliyunClient) getCallerIdentity() (*sts.GetCallerIdentityResponse, error) {
 	args := sts.CreateGetCallerIdentityRequest()
 
